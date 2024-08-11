@@ -337,3 +337,124 @@ ENTRYPOINT ["docker_entry.sh"]
 7. **`ENTRYPOINT ["docker_entry.sh"]`**  
    Sets `docker_entry.sh` as the default command to run when the container starts.
 
+## Docker compose 
+
+This Docker Compose setup builds and runs three containers (nginx, wordpress, mariadb) connected to a common network and using specific volumes for data persistence. Nginx serves the WordPress site, WordPress runs the application, and MariaDB provides the database backend. The configuration ensures that containers are automatically restarted if they fail and sets up appropriate networking and volume bindings.
+
+```
+version: "3.9"
+services:
+  nginx:
+    build:
+      dockerfile: ./requirements/nginx/Dockerfile
+    container_name: nginx
+    env_file:
+      - ./.env
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    ports:
+      - "443:443"
+    networks:
+      - web
+    depends_on:
+      - wordpress
+    restart: always
+  wordpress:
+    build:
+      dockerfile: ./requirements/wordpress/Dockerfile
+    container_name: wordpress
+    env_file:
+      - ./.env
+    volumes:
+      - wordpress:/var/www/html/wordpress
+    networks:
+      - web
+    expose:
+      - "9000:9000"
+    depends_on:
+      - mariadb
+    restart: always
+  mariadb:
+    build:
+      dockerfile: ./requirements/mariadb/Dockerfile
+    container_name: mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    networks:
+      - web
+    env_file:
+      - ./.env
+    expose:
+      - "3306:3306"
+    restart: always
+networks:
+  web:
+volumes:
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/Users/${USER}/data/wordpress'
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/Users/${USER}/data/mariadb'
+```
+
+
+The file defines a multi-container Docker application using Docker Compose. It sets up three services: **`nginx`, `wordpress`, and `mariadb`**, along with configurations for networks and volumes.
+
+### Services
+
+1. **nginx**:
+   - **`build`**: Uses the Dockerfile located at `./requirements/nginx/Dockerfile` to build the Nginx image.
+   - **`container_name`**: Names the container `nginx`.
+   - **`env_file`**: Loads environment variables from a `.env` file.
+   - **`volumes`**: Mounts the `wordpress` volume to `/var/www/html/wordpress` inside the container, allowing the Nginx server to serve WordPress files.
+   - **`ports`**: Maps port 443 on the host to port 443 in the container, which is used for HTTPS.
+   - **`networks`**: Connects to the `web` network.
+   - **`depends_on`**: Ensures that the `wordpress` container starts before `nginx`.
+   - **`restart`**: Automatically restarts the container if it stops.
+
+2. **wordpress**:
+   - **`build`**: Uses the Dockerfile located at `./requirements/wordpress/Dockerfile` to build the WordPress image.
+   - **`container_name`**: Names the container `wordpress`.
+   - **`env_file`**: Loads environment variables from a `.env` file.
+   - **`volumes`**: Mounts the `wordpress` volume to `/var/www/html/wordpress` inside the container.
+   - **`networks`**: Connects to the `web` network.
+   - **`expose`**: Exposes port 9000 for communication within the Docker network, used by PHP-FPM to serve PHP files.
+   - **`depends_on`**: Ensures that the `mariadb` container starts before `wordpress`.
+   - **`restart`**: Automatically restarts the container if it stops.
+
+3. **mariadb**:
+   - **`build`**: Uses the Dockerfile located at `./requirements/mariadb/Dockerfile` to build the MariaDB image.
+   - **`container_name`**: Names the container `mariadb`.
+   - **`volumes`**: Mounts the `mariadb` volume to `/var/lib/mysql` inside the container, which is where MariaDB stores its data.
+   - **`networks`**: Connects to the `web` network.
+   - **`env_file`**: Loads environment variables from a `.env` file.
+   - **`expose`**: Exposes port 3306 for communication within the Docker network, used by the WordPress container to connect to MariaDB.
+   - **`restart`**: Automatically restarts the container if it stops.
+
+### Networks
+- **`web`**: Defines a network named `web` that connects all three services (`nginx`, `wordpress`, and `mariadb`).
+
+### Volumes
+1. **`wordpress`**:
+   - **`name`**: Names the volume `wordpress`.
+   - **`driver`**: Uses the `local` driver.
+   - **`driver_opts`**: Specifies options for the volume:
+     - **`type: 'none'`**: Mounts the directory as a bind mount.
+     - **`o: 'bind'`**: Binds to a specific path on the host.
+     - **`device: '/Users/${USER}/data/wordpress'`**: Specifies the path on the host for the volume. `${USER}` is replaced with the current username.
+
+2. **`mariadb`**:
+   - **`name`**: Names the volume `mariadb`.
+   - **`driver`**: Uses the `local` driver.
+   - **`driver_opts`**: Specifies options for the volume:
+     - **`type: 'none'`**: Mounts the directory as a bind mount.
+     - **`o: 'bind'`**: Binds to a specific path on the host.
