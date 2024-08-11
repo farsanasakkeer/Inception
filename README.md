@@ -24,3 +24,16 @@
 - **VMs** are like separate computers with their own OS, which are heavier and slower to start. 
 
 Containers are more efficient and faster but offer less isolation compared to VMs.
+
+
+
+- **Components of Docker**:
+  - **Docker Engine**: The runtime that enables containers to run on a host machine.A Docker image is similar to a snapshot in other types of VM environments. It's a record of a Docker container at a specific point in time
+  - **Docker CLI**: Command-line interface to interact with Docker.
+  - **Docker Daemon**: Manages Docker containers and images.
+  - **Docker Hub**: A cloud-based repository for sharing Docker images.
+
+### **Docker Image and Container**
+- **Docker Image**: A lightweight, standalone, and executable package that includes everything needed to run a piece of software (code, runtime, libraries, environment variables, and config files).
+- **Docker Container**: A running instance of a Docker image that operates in an isolated environment.
+
