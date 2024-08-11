@@ -86,3 +86,44 @@ https://www.sitepoint.com/what-is-docker/
 
 https://www.techtarget.com/searchitoperations/definition/Docker-image#:~:text=A%20Docker%20container%20can%20use,a%20specific%20point%20in%20time.
 
+
+## mariadb
+`
+#!/usr/bin/env bash
+
+echo >> $DB_CONF_ROUTE
+echo "[mysqld]" >> $DB_CONF_ROUTE
+echo "bind-address=0.0.0.0" >> $DB_CONF_ROUTE #allows MySQL to listen for connections from any IP address, not just localhost.
+
+mysql_install_db --datadir=$DB_INSTALL
+
+mysqld_safe &
+mysql_pid=$!
+
+until mysqladmin ping >/dev/null 2>&1; do
+  echo -n "."; sleep 0.2
+done
+
+mysql -u root -e "CREATE DATABASE $DB_NAME;
+    ALTER USER 'root'@'localhost' IDENTIFIED BY '$DB_ROOT_PASS';
+    GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';
+    FLUSH PRIVILEGES;"
+
+wait $mysql_pid #This waits for the MySQL server process, identified by mysql_pid, to complete before proceeding
+`
+The basic idea of this script is to set up and configure a MySQL server. 
+
+1. **Configure MySQL**: It modifies the MySQL configuration file to allow MySQL to accept connections from any IP address (`bind-address=0.0.0.0`).
+
+2. **Initialize Database**: It initializes the MySQL data directory with necessary database files.
+
+3. **Start MySQL Server**: It starts the MySQL server in the background.
+
+4. **Wait for MySQL Server**: It repeatedly checks to ensure that the MySQL server is up and running by pinging it until a successful response is received.
+
+5. **Set Up Database and User**: Once the server is running, it creates a new database, sets or updates the root user’s password, and creates a new user with specific permissions on the new database.
+
+6. **Ensure Server is Ready**: It waits for the MySQL server process to finish starting up before concluding the script.
+
+Overall, the script automates the process of configuring, starting, and setting up a MySQL server with a specific database and user configuration.
+
