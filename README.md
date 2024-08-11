@@ -82,3 +82,7 @@ Once the Dockerfile is created, the docker build command is used to build the im
 
 The video also demonstrated how to manage multiple Docker containers using Docker Compose. Docker Compose allows you to define and run multi-container Docker applications using a YAML file. This simplifies the process of setting up and managing complex applications with multiple interconnected services.
 
+https://www.sitepoint.com/what-is-docker/
+
+https://www.techtarget.com/searchitoperations/definition/Docker-image#:~:text=A%20Docker%20container%20can%20use,a%20specific%20point%20in%20time.
+
