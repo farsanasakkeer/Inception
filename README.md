@@ -88,7 +88,8 @@ https://www.techtarget.com/searchitoperations/definition/Docker-image#:~:text=A%
 
 
 ## mariadb
-` #!/usr/bin/env bash
+```
+ #!/usr/bin/env bash
 
 echo >> $DB_CONF_ROUTE
 echo "[mysqld]" >> $DB_CONF_ROUTE
@@ -108,7 +109,8 @@ mysql -u root -e "CREATE DATABASE $DB_NAME;
     GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';
     FLUSH PRIVILEGES;"
 
-wait $mysql_pid #This waits for the MySQL server process, identified by mysql_pid, to complete before proceeding `
+wait $mysql_pid #This waits for the MySQL server process, identified by mysql_pid, to complete before proceeding
+```
 The basic idea of this script is to set up and configure a MySQL server. 
 
 1. **Configure MySQL**: It modifies the MySQL configuration file to allow MySQL to accept connections from any IP address (`bind-address=0.0.0.0`).
