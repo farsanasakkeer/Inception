@@ -1,5 +1,6 @@
 # Inception
 
+**Containers**
 - **Containers** are like lightweight, portable boxes that can run an application along with everything it needs (like code, libraries, and settings).
 - They share the operating system of the host machine but are isolated from each other and the host.
 - They start up quickly and use fewer resources because they don’t need their own operating system.
