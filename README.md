@@ -410,6 +410,7 @@ volumes:
 The file defines a multi-container Docker application using Docker Compose. It sets up three services: **`nginx`, `wordpress`, and `mariadb`**, along with configurations for networks and volumes.
 
 ### Services
+---------
 
 1. **nginx**:
    - **`build`**: Uses the Dockerfile located at `./requirements/nginx/Dockerfile` to build the Nginx image.
@@ -441,9 +442,11 @@ The file defines a multi-container Docker application using Docker Compose. It s
    - **`restart`**: Automatically restarts the container if it stops.
 
 ### Networks
+--------
 - **`web`**: Defines a network named `web` that connects all three services (`nginx`, `wordpress`, and `mariadb`).
 
 ### Volumes
+---------
 1. **`wordpress`**:
    - **`name`**: Names the volume `wordpress`.
    - **`driver`**: Uses the `local` driver.
