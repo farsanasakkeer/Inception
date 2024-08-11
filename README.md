@@ -37,3 +37,14 @@ Containers are more efficient and faster but offer less isolation compared to VM
 - **Docker Image**: A lightweight, standalone, and executable package that includes everything needed to run a piece of software (code, runtime, libraries, environment variables, and config files).
 - **Docker Container**: A running instance of a Docker image that operates in an isolated environment.
 
+
+## **NGINX**
+
+**NGINX** is a tool that helps deliver websites to users. 
+
+- **Web Server**: It sends web pages to your browser when you visit a website.
+- **Reverse Proxy**: It can forward your requests to other servers.
+- **Load Balancer**: It spreads incoming traffic across multiple servers to keep things running smoothly.
+- **Cache**: It stores copies of popular pages to speed up loading times.
+
+In short, NGINX helps make websites faster and more reliable.
