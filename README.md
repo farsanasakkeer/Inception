@@ -1,7 +1,7 @@
 # Inception
 
 ## **Containers**
-- **Containers** are like lightweight, portable boxes that can run an application along with everything it needs (like code, libraries, and settings).
+- **Containers** are like lightweight, portable boxes that can run an application along with everything it needs (like code, libraries, and settings).Docker provides a standardized environment for running applications. It packages applications and their dependencies into containers, which are isolated environments. This ensures consistency and reproducibility across different systems.
 - They share the operating system of the host machine but are isolated from each other and the host.
 - They start up quickly and use fewer resources because they don’t need their own operating system.
 
