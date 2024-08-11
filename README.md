@@ -75,3 +75,10 @@ Without a reverse proxy, users would directly access these servers. However, you
 
 5. **User Receives the Response**: NGINX then sends the final response back to the user’s browser.
 
+https://www.youtube.com/watch?v=Tyy1BUEmhwg&t=217s
+The video then delved into the technical aspects of Docker. It explained how to create a Dockerfile, which is a set of instructions for building a Docker image. An image is a read-only template that contains the application code, libraries, and dependencies. The Dockerfile specifies the base image, copies necessary files, installs dependencies, and sets the command to run when the container starts.
+
+Once the Dockerfile is created, the docker build command is used to build the image. The resulting image can then be used to create multiple containers, each representing an isolated instance of the application.
+
+The video also demonstrated how to manage multiple Docker containers using Docker Compose. Docker Compose allows you to define and run multi-container Docker applications using a YAML file. This simplifies the process of setting up and managing complex applications with multiple interconnected services.
+
