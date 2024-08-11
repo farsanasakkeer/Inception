@@ -341,6 +341,10 @@ ENTRYPOINT ["docker_entry.sh"]
 
 This Docker Compose setup builds and runs three containers (nginx, wordpress, mariadb) connected to a common network and using specific volumes for data persistence. Nginx serves the WordPress site, WordPress runs the application, and MariaDB provides the database backend. The configuration ensures that containers are automatically restarted if they fail and sets up appropriate networking and volume bindings.
 
+**Services**: Define and manage containers, specifying their configuration and behavior.
+**Volumes**: Persist and manage data used by containers.
+**Networks**: Facilitate communication between containers, allowing them to interact with each other based on network configuration.
+
 ```
 version: "3.9"
 services:
