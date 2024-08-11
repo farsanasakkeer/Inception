@@ -48,3 +48,30 @@ Containers are more efficient and faster but offer less isolation compared to VM
 - **Cache**: It stores copies of popular pages to speed up loading times.
 
 In short, NGINX helps make websites faster and more reliable.
+
+
+Here’s a simple example to illustrate how NGINX works as a reverse proxy:
+
+## **Example: Using NGINX as a Reverse Proxy**
+
+Imagine you have a website with two parts:
+
+1. **A main web server** that handles general requests (e.g., homepage, blog posts).
+2. **An application server** that handles specific tasks (e.g., user login, data processing).
+
+Without a reverse proxy, users would directly access these servers. However, you want to streamline the process and add a layer of security.
+
+### **How NGINX Works as a Reverse Proxy**
+
+1. **User Request**: A user wants to log in to your website and types the URL into their browser.
+   
+2. **NGINX as a Gatekeeper**: The request first goes to NGINX, which is set up as a reverse proxy.
+
+3. **Forwarding Requests**:
+   - If the request is for the main website content (like the homepage), NGINX sends it to the main web server.
+   - If the request is for login or data processing, NGINX forwards it to the application server.
+
+4. **Response**: Once the servers process the request, they send the response back to NGINX.
+
+5. **User Receives the Response**: NGINX then sends the final response back to the user’s browser.
+
