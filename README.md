@@ -5,7 +5,7 @@
 - They share the operating system of the host machine but are isolated from each other and the host.
 - They start up quickly and use fewer resources because they don’t need their own operating system.
 
-### **Containers vs. Virtual Machines**
+## **Containers vs. Virtual Machines**
 
 1. **Containers**:
    - **Size**: Smaller because they share the host OS.
@@ -27,7 +27,7 @@ Containers are more efficient and faster but offer less isolation compared to VM
 
 
 
-- **Components of Docker**:
+## **Components of Docker**:
   - **Docker Engine**: The runtime that enables containers to run on a host machine.A Docker image is similar to a snapshot in other types of VM environments. It's a record of a Docker container at a specific point in time
   - **Docker CLI**: Command-line interface to interact with Docker.
   - **Docker Daemon**: Manages Docker containers and images.
